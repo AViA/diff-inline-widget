@@ -29,10 +29,10 @@ from pathlib import Path
 # Constants
 # ---------------------------------------------------------------------------------------------------------------------
 
-# The renderer is loaded from this URL. OWNER and REF are placeholders until the repository is published: while
-# developing, pin a commit (.../diff-inline-widget@<commit sha>/src/diff.js); for a release, pin its tag (@v1.0.0).
-# Both are immutable on jsDelivr. tests/check_pin.py verifies that the pinned file equals src/diff.js.
-SCRIPT_URL = "https://cdn.jsdelivr.net/gh/OWNER/diff-inline-widget@REF/src/diff.js"
+# The renderer is loaded from this URL, pinned to an immutable reference: a commit hash while developing and a
+# version tag (@v1.0.0) for a release. Both are immutable on jsDelivr. tests/check_pin.py verifies that the pinned
+# file equals src/diff.js.
+SCRIPT_URL = "https://cdn.jsdelivr.net/gh/AViA/diff-inline-widget@7d85dd14390af03ca519d5fa9bc6a680c5317a32/src/diff.js"
 
 # The widget code: a heading for screen readers, the data, and the loader. __TITLE_HTML__, __DATA__ and __URL__ are
 # filled in. No literal closing script tag or HTML comment may appear anywhere in it (the host cuts the code there).
