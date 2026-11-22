@@ -1,0 +1,23 @@
+[
+  {
+    "label": "App: Rust backend",
+    "adapter": "CodeLLDB",
+    "request": "launch"
+  },
+  {
+    "label": "App: frontend (attach to the web view)",
+    "adapter": "JavaScript",
+    "type": "pwa-chrome",
+    "request": "attach",
+    "port": 9222,
+    "webRoot": "src/frontend",
+    "sourceMaps": true
+  },
+  {
+    "label": "Frontend in Chrome",
+    "adapter": "JavaScript",
+    "type": "pwa-chrome",
+    "request": "launch",
+    "url": "http://localhost:1420"
+  }
+]

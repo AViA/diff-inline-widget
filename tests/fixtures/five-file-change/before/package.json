@@ -1,0 +1,20 @@
+{
+  "name": "example-app",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Example App: a small project used as test data for the diff widget.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.ts",
+    "build": "node src/frontend/scripts/build.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test test/*.test.ts"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}

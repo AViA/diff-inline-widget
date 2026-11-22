@@ -1,0 +1,13 @@
+// Zed tasks (command palette: "task: spawn").
+[
+  { "label": "build debug app", "command": "npm", "args": ["run", "debug:build"], "cwd": "$ZED_WORKTREE_ROOT", "reveal": "no_focus", "use_new_terminal": false },
+  { "label": "frontend: dev server (http://localhost:1420)", "command": "npm", "args": ["run", "dev"], "cwd": "$ZED_WORKTREE_ROOT", "use_new_terminal": true, "allow_concurrent_runs": false },
+  { "label": "frontend: build", "command": "npm", "args": ["run", "build"], "cwd": "$ZED_WORKTREE_ROOT" },
+  { "label": "frontend: typecheck", "command": "npm", "args": ["run", "typecheck"], "cwd": "$ZED_WORKTREE_ROOT" },
+  { "label": "frontend: unit tests", "command": "npm", "args": ["test"], "cwd": "$ZED_WORKTREE_ROOT" },
+  { "label": "frontend: sync builds from the website's repo", "command": "npm", "args": ["run", "sync:builds"], "cwd": "$ZED_WORKTREE_ROOT" },
+  { "label": "app: tauri dev", "command": "npm", "args": ["run", "app:dev"], "cwd": "$ZED_WORKTREE_ROOT", "use_new_terminal": true },
+  { "label": "app: tauri build", "command": "npm", "args": ["run", "app:build"], "cwd": "$ZED_WORKTREE_ROOT" },
+  { "label": "backend: cargo test", "command": "cargo", "args": ["test", "--workspace"], "cwd": "$ZED_WORKTREE_ROOT" },
+  { "label": "backend: cargo clippy", "command": "cargo", "args": ["clippy", "--workspace", "--all-targets"], "cwd": "$ZED_WORKTREE_ROOT" }
+]

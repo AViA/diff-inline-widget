@@ -1,0 +1,2 @@
+# LF line endings on every platform, so patches and tree hashes match across machines.
+* text=auto eol=lf

@@ -1,0 +1,69 @@
+// Zed debug configurations (Debug panel -> new session, or command palette: "debugger: start").
+// Zed requires "adapter" and "label"; every field supports Zed task variables ($ZED_WORKTREE_ROOT, $ZED_FILE, ...).
+//
+// Debugging the desktop app uses two sessions at once:
+//   1. "App: Rust backend": CodeLLDB runs the debug build (the "build debug app" task in tasks.json builds the
+//      frontend and the Rust workspace first) and opens its web view with a remote-debugging port;
+//   2. "App: frontend (attach)": Zed's JavaScript debugger attaches to that web view on port 9222.
+// Windows: WebView2 reads WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS. LLDB reads MSVC .pdb files only partly;
+// if breakpoints in Rust don't bind, use the GNU toolchain (rustup default stable-x86_64-pc-windows-gnu).
+[
+  {
+    "label": "App: Rust backend (Windows)",
+    "adapter": "CodeLLDB",
+    "request": "launch",
+    "build": "build debug app",
+    "program": "$ZED_WORKTREE_ROOT/target/debug/example-app.exe",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "env": {
+      "WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS": "--remote-debugging-port=9222",
+      "RUST_BACKTRACE": "1"
+    }
+  },
+  {
+    "label": "App: Rust backend (macOS / Linux)",
+    "adapter": "CodeLLDB",
+    "request": "launch",
+    "build": "build debug app",
+    "program": "$ZED_WORKTREE_ROOT/target/debug/example-app",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "env": { "RUST_BACKTRACE": "1" }
+  },
+  {
+    "label": "App: frontend (attach to the web view)",
+    "adapter": "JavaScript",
+    "type": "pwa-chrome",
+    "request": "attach",
+    "port": 9222,
+    "webRoot": "$ZED_WORKTREE_ROOT/src/frontend",
+    "sourceMaps": true
+  },
+  {
+    "label": "Frontend in Chrome (needs the dev server task)",
+    "adapter": "JavaScript",
+    "type": "pwa-chrome",
+    "request": "launch",
+    "url": "http://localhost:1420",
+    "webRoot": "$ZED_WORKTREE_ROOT/src/frontend",
+    "sourceMaps": true
+  },
+  {
+    "label": "Test: current file (node:test)",
+    "adapter": "JavaScript",
+    "type": "pwa-node",
+    "request": "launch",
+    "program": "$ZED_FILE",
+    "runtimeArgs": ["--test"],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "skipFiles": ["<node_internals>/**"]
+  },
+  {
+    "label": "Script: current file (node)",
+    "adapter": "JavaScript",
+    "type": "pwa-node",
+    "request": "launch",
+    "program": "$ZED_FILE",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "skipFiles": ["<node_internals>/**"]
+  }
+]
